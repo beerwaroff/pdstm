@@ -1,0 +1,71 @@
+.container {
+    width: 100%;
+    height: 100vh;
+    background-image: linear-gradient(rgba(232, 232, 232, 0.5), rgba(232, 232, 232, 0.5));
+    background-size: cover;
+    background-position: center;
+}
+
+.cred-forms{
+    width: 600px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    padding: 40px;
+    text-align: center;
+    border-radius: 5px;
+    box-shadow: 0 0 10px #fff;
+    background-image: linear-gradient(rgba(232, 232, 232, 0.5), rgba(232, 232, 232, 0.5));
+}
+
+.activation-forms{
+    width: 1000px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    padding: 40px;
+    text-align: center;
+    border-radius: 5px;
+    box-shadow: 0 0 10px #fff;
+    background-image: linear-gradient(rgba(232, 232, 232, 0.5), rgba(232, 232, 232, 0.5));
+}
+
+.cred-forms h1 {
+    color: #000;
+    text-transform: uppercase;
+    position: center;
+}
+
+.cred-forms input[type = "text"], .cred-forms input[type="password"] {
+    display: block;
+    background: none;
+    border: none;
+    outline: 0;
+    color: #000;
+    text-align: center;
+    margin: 20px auto;
+    border: 2px solid #666;
+    padding: 15px 20px;
+    border-radius: 25px;
+}
+
+.cred-forms input[type = "submit"] {
+    display: block;
+    background: none;
+    border: none;
+    outline: 0;
+    color: #000;
+    text-align: center;
+    margin: 20px auto;
+    border: 2px solid #666;
+    padding: 15px 40px;
+    border-radius: 25px;
+}
+
+.cred-forms input[type = "submit"]:hover {
+    background-color: #555;
+    cursor: pointer;
+    border: 2px solid #fff;
+}

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Моделирование угроз безопасности ПДн</title>
+    <link th:href="@{/styles/index.css}" rel="stylesheet">
+    <link th:href="@{/styles/cred-forms.css}" rel="stylesheet">
+</head>
+<div th:insert="fragments.html :: header"></div>
+<body>
+<div class="container">
+    <form th:action="@{/register}" th:method="post" th:object="${request}" class="cred-forms">
+        <h1>ВВЕДИТЕ EMAIL</h1>
+        <input th:field="*{email}" type="text" placeholder="Почта"/>
+        <div style="color:red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+        <input type="submit" value="ОТПРАВИТЬ ПИСЬМО"/>
+    </form>
+</div>
+</body>
+</html>

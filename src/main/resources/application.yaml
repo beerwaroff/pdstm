@@ -1,0 +1,29 @@
+spring:
+  datasource:
+    driver-class-name: ${POSTGRES_DRIVER}
+    url: ${POSTGRES_STUDY_DB_URL}
+    username: ${POSTGRES_USERNAME}
+    password: ${POSTGRES_PASSWORD}
+#  security:
+#    filter:
+#      dispatcher-types:
+#        - request
+#        - error
+
+mail:
+  host: smtp.yandex.ru
+  username: ${MAIL_USERNAME}
+  password: ${MAIL_PASSWORD}
+  port: 465
+  protocol: smtps
+
+server:
+  port: 8080
+  host: "http://localhost:"
+
+logging:
+  level:
+    org:
+      jooq:
+        tools:
+          LoggerListener: DEBUG

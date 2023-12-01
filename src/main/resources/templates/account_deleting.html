@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Моделирование угроз безопасности ПДн</title>
+    <link th:href="@{/styles/index.css}" rel="stylesheet">
+    <link th:href="@{/styles/cred-forms.css}" rel="stylesheet">
+</head>
+<div th:insert="fragments.html :: header"></div>
+<body>
+    <div class="container">
+        <form th:action="@{/account-deleting}" method="post" class="cred-forms">
+            <h1>ПОДТВЕРДИТЕ УДАЛЕНИЕ</h1>
+            <input type="submit" value="Подтвердить">
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Моделирование угроз безопасности ПДн</title>
+    <link th:href="@{/styles/index.css}" rel="stylesheet">
+</head>
+<body>
+    <div th:fragment="header">
+        <header>
+            <nav>
+                <ul>
+                    <li><a th:href="@{/login}">ВОЙТИ</a></li>
+                    <li><a th:href="@{/register}">РЕГИСТРАЦИЯ</a></li>
+                </ul>
+            </nav>
+        </header>
+        <header sec:authorize="isAuthenticated()">
+            <a th:href="@{/}">НА ГЛАВНУЮ</a>
+            <nav>
+                <ul>
+                    <li><a th:href="@{/password-changing}">СМЕНИТЬ ПАРОЛЬ</a></li>
+                    <li><a th:href="@{/account-deleting}">УДАЛИТЬ АККАУНТ</a></li>
+                    <li><a th:href="@{/logout}">ВЫЙТИ</a></li>
+                </ul>
+            </nav>
+        </header>
+    </div>
+</body>
+</html>
