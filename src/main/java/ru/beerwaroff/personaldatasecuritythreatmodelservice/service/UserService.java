@@ -1,6 +1,6 @@
 package ru.beerwaroff.personaldatasecuritythreatmodelservice.service;
 
-import ru.beerwaroff.personaldatasecuritythreatmodelservice.model.User;
+import ru.beerwaroff.personaldatasecuritythreatmodelservice.dto.User;
 
 public interface UserService {
     void add(User user);

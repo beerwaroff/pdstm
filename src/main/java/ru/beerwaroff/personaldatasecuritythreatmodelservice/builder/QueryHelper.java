@@ -1,37 +1,29 @@
 package ru.beerwaroff.personaldatasecuritythreatmodelservice.builder;
 
+import lombok.NoArgsConstructor;
 import org.jooq.Condition;
 import org.jooq.SelectForUpdateStep;
 import org.jooq.SelectWhereStep;
 import org.springframework.lang.Nullable;
-import org.springframework.stereotype.Component;
-import ru.beerwaroff.personaldatasecuritythreatmodelservice.dto.FilterRequest;
+import ru.beerwaroff.personaldatasecuritythreatmodelservice.dto.request.FilterRequest;
 
 import java.util.List;
 
+import static lombok.AccessLevel.PRIVATE;
 import static org.jooq.impl.DSL.field;
 import static org.jooq.impl.DSL.noCondition;
 import static ru.beerwaroff.personaldatasecuritythreatmodelservice.builder.QueryHelper.Operator.EQ;
 
-@Component
-public class QueryHelper {
-    public SelectForUpdateStep<?> build(SelectWhereStep<?> select, List<FilterRequest> filters) {
-        return select
-                .where(this.filter(filters));
-    }
+@NoArgsConstructor(access = PRIVATE)
+public final class QueryHelper {
 
-    public SelectForUpdateStep<?> build(SelectWhereStep<?> select, FilterRequest filter) {
-        return select
-                .where(this.filter(filter));
-    }
-
-    private Condition filter(@Nullable List<FilterRequest> filters) {
+    public static Condition filter(@Nullable List<FilterRequest> filters) {
         var condition = noCondition();
         if (filters != null) {
             for (var filter :  filters) {
                 var operator = filter.getOperator();
                 if (EQ.name().equals(operator)) {
-                    condition.and(
+                    condition = condition.and(
                             eq(filter.getColumn(), filter.getValues())
                     );
                 }
@@ -40,12 +32,12 @@ public class QueryHelper {
         return condition;
     }
 
-    private Condition filter(@Nullable FilterRequest filter) {
+    public static Condition filter(@Nullable FilterRequest filter) {
         var condition = noCondition();
         if (filter != null) {
                 var operator = filter.getOperator();
                 if (EQ.name().equals(operator)) {
-                    condition.and(
+                    condition = condition.and(
                             eq(filter.getColumn(), filter.getValues())
                     );
                 }
@@ -53,11 +45,11 @@ public class QueryHelper {
         return condition;
     }
 
-    private Condition eq(String column, List<String> values) {
+    private static Condition eq(String column, List<String> values) {
         var condition = noCondition();
         for (var value : values) {
-            condition.and(
-                    field(column).eq(value)
+            condition = condition.or(
+                    field(column).cast(String.class).eq(value)
             );
         }
         return condition;

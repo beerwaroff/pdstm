@@ -12,7 +12,7 @@ import ru.beerwaroff.personaldatasecuritythreatmodelservice.service.UserService;
 
 import static java.util.Collections.singletonList;
 import static org.apache.commons.codec.digest.DigestUtils.sha256Hex;
-import static ru.beerwaroff.personaldatasecuritythreatmodelservice.model.enums.Role.USER;
+import static ru.beerwaroff.personaldatasecuritythreatmodelservice.dto.enums.Role.USER;
 
 @Service
 @RequiredArgsConstructor

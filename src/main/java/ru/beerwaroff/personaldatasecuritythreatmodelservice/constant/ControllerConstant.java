@@ -8,6 +8,7 @@ import static ru.beerwaroff.personaldatasecuritythreatmodelservice.constant.Symb
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class ControllerConstant {
     public static final String LOGIN_URL = SLASH + "login";
+    public static final String LOGIN_FAILURE_URL = SLASH + "login-failure";
     public static final String REGISTER_URL = SLASH + "register";
     public static final String LOGOUT_URL = SLASH + "logout";
     public static final String USERS_URL = SLASH + "users";

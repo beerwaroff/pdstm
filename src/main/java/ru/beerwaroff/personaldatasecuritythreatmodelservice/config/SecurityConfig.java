@@ -6,7 +6,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
+import ru.beerwaroff.personaldatasecuritythreatmodelservice.exception.advice.ExceptionAdvice;
 
+import static ru.beerwaroff.personaldatasecuritythreatmodelservice.constant.ControllerConstant.LOGIN_FAILURE_URL;
 import static ru.beerwaroff.personaldatasecuritythreatmodelservice.constant.ControllerConstant.LOGIN_URL;
 import static ru.beerwaroff.personaldatasecuritythreatmodelservice.constant.ControllerConstant.LOGOUT_URL;
 
@@ -28,6 +30,7 @@ public class SecurityConfig {
                 .and()
                     .formLogin()
                     .loginPage(LOGIN_URL)
+                    .failureUrl(LOGIN_FAILURE_URL)
                 .and()
                 .logout()
                     .logoutUrl(LOGOUT_URL)

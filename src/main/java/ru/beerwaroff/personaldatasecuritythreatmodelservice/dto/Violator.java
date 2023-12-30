@@ -11,7 +11,9 @@ import lombok.Setter;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ExceptionResponse {
-    private int code;
-    private String message;
+public class Violator {
+    private String name;
+    private String level;
+    private String category;
+    private String lcId;
 }

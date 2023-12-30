@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import ru.beerwaroff.personaldatasecuritythreatmodelservice.dto.EmailRequest;
-import ru.beerwaroff.personaldatasecuritythreatmodelservice.dto.PasswordChangingRequest;
+import ru.beerwaroff.personaldatasecuritythreatmodelservice.dto.request.EmailRequest;
+import ru.beerwaroff.personaldatasecuritythreatmodelservice.dto.request.PasswordChangingRequest;
 import ru.beerwaroff.personaldatasecuritythreatmodelservice.mapper.UserMapper;
 import ru.beerwaroff.personaldatasecuritythreatmodelservice.service.UserService;
 
@@ -31,7 +31,6 @@ public class UserController {
     private final String REDIRECT = "redirect:";
     private final String REGISTER_TEMPLATE = "register";
     private final String PASSWORD_CHANGING_TEMPLATE = "password_changing";
-    private final String ACCOUNT_DELETING_TEMPLATE = "account_deleting";
 
     private final UserService service;
     private final UserMapper mapper;
@@ -100,7 +99,7 @@ public class UserController {
     @GetMapping(ACCOUNT_DELETING_URL)
     public String getAccountDeletingPage(Model model) {
         model.addAttribute(REQUEST_MODEL_ATTRIBUTE, new EmailRequest());
-        return ACCOUNT_DELETING_TEMPLATE;
+        return "account_deleting";
     }
 
     @PostMapping(ACCOUNT_DELETING_URL)

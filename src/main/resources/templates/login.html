@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <title>Моделирование угроз безопасности ПДн</title>
     <link th:href="@{/styles/index.css}" rel="stylesheet">
-    <link th:href="@{/styles/cred-forms.css}" rel="stylesheet">
+    <link th:href="@{/styles/cred-form.css}" rel="stylesheet">
 </head>
 <div th:insert="fragments.html :: header"></div>
 <body>
     <div class="container">
-        <form th:action="@{/login}" method="post" class="cred-forms">
+        <form th:action="@{/login}" method="post" class="cred-form">
             <h1>АУТЕНТИФИКАЦИЯ</h1>
             <input id="username" name="username" type="text" placeholder="Почта">
             <input id="password" name="password" type="password" placeholder="Пароль">

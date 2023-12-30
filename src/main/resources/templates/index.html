@@ -1,11 +1,16 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <link th:href="@{/styles/index.css}" rel="stylesheet">
+    <link th:href="@{/styles/cred-form.css}" rel="stylesheet">
     <title>Моделирование угроз безопасности ПДн</title>
 </head>
 <div th:insert="fragments.html :: header"></div>
 <body>
+    <div class="request-form">
+        <h1 align="center" style="padding-top:25px">ДЛЯ МОДЕЛИРОВАНИЯ УГРОЗ ЗАПОЛНИТЕ ФОРМУ НИЖЕ</h1>
+        <div th:insert="fragments.html :: tm-request-form"></div>
+    </div>
 </body>
 </html>

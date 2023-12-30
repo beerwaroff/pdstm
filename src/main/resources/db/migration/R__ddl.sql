@@ -108,3 +108,69 @@ CREATE TABLE pdstm.violator_implementation_goals (
 
 CREATE INDEX pdstm_violator_implementation_goals_violator_id_index ON pdstm.violator_implementation_goals (violator_id);
 CREATE INDEX pdstm_violator_implementation_goals_implementation_goal_id_index ON pdstm.violator_implementation_goals (implementation_goal_id);
+
+CREATE TABLE pdstm.implementation_methods (
+    id varchar(4) NOT NULL,
+    name varchar NOT NULL,
+    UNIQUE (name),
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE pdstm.violator_lc_methods (
+    id serial,
+    violator_lc_id integer,
+    impl_method_id varchar(4),
+    UNIQUE (violator_lc_id, impl_method_id),
+    FOREIGN KEY (violator_lc_id) REFERENCES pdstm.violator_levels_categories (id),
+    FOREIGN KEY (impl_method_id) REFERENCES pdstm.implementation_methods (id),
+    PRIMARY KEY (id)
+);
+
+CREATE INDEX pdstm_violator_lc_methods_violator_lc_id_index ON pdstm.violator_lc_methods (violator_lc_id);
+CREATE INDEX pdstm_violator_lc_methods_impl_method_id_index ON pdstm.violator_lc_methods (impl_method_id);
+
+CREATE TABLE pdstm.objects_methods (
+    id serial,
+    object_id integer NOT NULL,
+    method_id varchar(4) NOT NULL,
+    UNIQUE (object_id, method_id),
+    FOREIGN KEY (object_id) REFERENCES pdstm.influence_objects (id),
+    FOREIGN KEY (method_id) REFERENCES pdstm.implementation_methods (id),
+    PRIMARY KEY (id)
+);
+
+CREATE INDEX pdstm_objects_methods_object_id_index ON pdstm.objects_methods (object_id);
+CREATE INDEX pdstm_objects_methods_method_id_index ON pdstm.objects_methods (method_id);
+
+CREATE TABLE pdstm.threats (
+    id varchar(16) NOT NULL,
+    name varchar NOT NULL,
+    UNIQUE (id, name),
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE pdstm.threats_objects (
+    id serial,
+    threat_id varchar NOT NULL,
+    object_id integer NOT NULL,
+    UNIQUE (threat_id, object_id),
+    FOREIGN KEY (threat_id) REFERENCES pdstm.threats (id),
+    FOREIGN KEY (object_id) REFERENCES pdstm.influence_objects (id),
+    PRIMARY KEY (id)
+);
+
+CREATE INDEX pdstm_threats_objects_threat_id_index ON pdstm.threats_objects (threat_id);
+CREATE INDEX pdstm_threats_objects_object_id_index ON pdstm.threats_objects (object_id);
+
+CREATE TABLE pdstm.threats_nc (
+    id serial,
+    threat_id varchar NOT NULL,
+    nc_id varchar NOT NULL,
+    UNIQUE (threat_id, nc_id),
+    FOREIGN KEY (threat_id) REFERENCES pdstm.threats (id),
+    FOREIGN KEY (nc_id) REFERENCES pdstm.negative_consequences (id),
+    PRIMARY KEY (id)
+);
+
+CREATE INDEX pdstm_threats_nc_threat_id_index ON pdstm.threats_nc (threat_id);
+CREATE INDEX pdstm_threats_nc_nc_id_index ON pdstm.threats_nc (nc_id);

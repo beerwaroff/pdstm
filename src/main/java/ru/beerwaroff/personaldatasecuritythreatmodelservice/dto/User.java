@@ -1,4 +1,4 @@
-package ru.beerwaroff.personaldatasecuritythreatmodelservice.model;
+package ru.beerwaroff.personaldatasecuritythreatmodelservice.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

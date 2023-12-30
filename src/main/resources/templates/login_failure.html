@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Моделирование угроз безопасности ПДн</title>
+    <link th:href="@{/styles/index.css}" rel="stylesheet">
+    <link th:href="@{/styles/cred-form.css}" rel="stylesheet">
+</head>
+<div th:insert="fragments.html :: header"></div>
+<body>
+<div class="container">
+    <form th:action="@{/login}" method="post" class="cred-form">
+        <h1>АУТЕНТИФИКАЦИЯ ПРОВАЛЕНА, ПОВТОРИТЕ ПОПЫТКУ</h1>
+        <input id="username" name="username" type="text" placeholder="Почта">
+        <input id="password" name="password" type="password" placeholder="Пароль">
+        <input type="submit" value="Войти">
+        <a th:href="@{/register}">Забыли пароль?</a>
+    </form>
+</div>
+</body>
+</html>

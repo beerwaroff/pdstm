@@ -1,24 +1,23 @@
 package ru.beerwaroff.personaldatasecuritythreatmodelservice.controller;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import static ru.beerwaroff.personaldatasecuritythreatmodelservice.constant.ControllerConstant.LOGIN_FAILURE_URL;
 import static ru.beerwaroff.personaldatasecuritythreatmodelservice.constant.ControllerConstant.LOGIN_URL;
 
 @Controller
-@RequiredArgsConstructor
 public class AuthenticationController {
-
-    @GetMapping
-    public String home() {
-        return "index";
-    }
 
     @GetMapping(LOGIN_URL)
     public String loginPage() {
         return "login";
+    }
+
+    @GetMapping(LOGIN_FAILURE_URL)
+    public String loginFailurePage() {
+        return "login_failure";
     }
 
     @PostMapping(LOGIN_URL)

@@ -7,7 +7,8 @@
 </head>
 <body>
     <div th:fragment="header">
-        <header>
+        <header sec:authorize="!isAuthenticated()">
+            <a th:href="@{/}">НА ГЛАВНУЮ</a>
             <nav>
                 <ul>
                     <li><a th:href="@{/login}">ВОЙТИ</a></li>
@@ -25,6 +26,45 @@
                 </ul>
             </nav>
         </header>
+    </div>
+    <div th:fragment="tm-request-form">
+        <form th:action="@{/}" th:method="post" th:object="${request}">
+            <input th:field="*{names.organizationName}" type="text" placeholder="Название компании" />
+            <input th:field="*{names.systemName}" type="text" placeholder="Название ИСПДн"/>
+            <input th:field="*{responsible.position}" type="text" placeholder="Должность ответственного за безопасность"/>
+            <input th:field="*{info.category}" type="text" placeholder="Категория ПДн"/>
+            <textarea th:field="*{structure.pc}" placeholder="Программно-аппаратные средства и их характеристика"/>
+            <textarea th:field="*{structure.software}" placeholder="Программное обеспечение"/>
+            <textarea th:field="*{structure.securityTools}" placeholder="Средства защиты информации"/>
+            <div class="request-quiz">
+                <p>
+                    <input th:field="*{answers.isGovernmental}" type="checkbox" value="true" >Имеет отношение к государственным структурам<br>
+                </p>
+                <p>
+                    <input th:field="*{answers.isAccessRemovable}" type="checkbox" value="true">Доступ к съемным носителям<br>
+                </p>
+                <p>
+                    <input th:field="*{answers.isProtect}" type="checkbox" value="true">СЗИ<br>
+                </p>
+                <p>
+                    <input th:field="*{answers.isFinancial}" type="checkbox" value="true">Представляет финансовый интерес<br>
+                </p>
+                <p>
+                    <input th:field="*{answers.isExternal}" type="checkbox" value="true">Имеет выход в общую сеть<br>
+                </p>
+                <p>
+                    <input th:field="*{answers.hasDevelopers}" type="checkbox" value="true">В организации есть разработчики<br>
+                </p>
+                <p>
+                    <input th:field="*{answers.hasOpponents}" type="checkbox" value="true">Имеет конкурентов<br>
+                </p>
+                <p>
+                    <input th:field="*{answers.isAccessKz}" type="checkbox" value="true">Свободный доступ в КЗ<br>
+                </p>
+            </div>
+            <input type="submit" sec:authorize="isAuthenticated()" value="Составить модель угроз">
+            <div style="text-align: center" sec:authorize="!isAuthenticated()">МОДЕЛИРОВАНИЕ УГРОЗ ДОСТУПНО ПОЛЬЗОВАТЕЛЯМ, КОТОРЫЕ ПРОШЛИ АУТЕНТИФИКАЦИЮ</div>
+        </form>
     </div>
 </body>
 </html>

@@ -4,11 +4,6 @@ spring:
     url: ${POSTGRES_STUDY_DB_URL}
     username: ${POSTGRES_USERNAME}
     password: ${POSTGRES_PASSWORD}
-#  security:
-#    filter:
-#      dispatcher-types:
-#        - request
-#        - error
 
 mail:
   host: smtp.yandex.ru

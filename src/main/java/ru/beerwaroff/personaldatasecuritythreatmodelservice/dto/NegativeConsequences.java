@@ -6,17 +6,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
-
 @Builder
 @Setter
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class EmailRequest {
-
-    @Email(message = "Почта не валидна.")
-    @NotNull(message = "Обязательно поле.")
-    private String email;
+public class NegativeConsequences {
+    private String id;
+    private String name;
+    private String risk;
 }

@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <title>Моделирование угроз безопасности ПДн</title>
     <link th:href="@{/styles/index.css}" rel="stylesheet">
-    <link th:href="@{/styles/cred-forms.css}" rel="stylesheet">
+    <link th:href="@{/styles/cred-form.css}" rel="stylesheet">
 </head>
 <div th:insert="fragments.html :: header"></div>
 <body>
 <div class="container">
-    <form th:object="${response}" class="cred-forms">
-        <h1 th:field="*{code}"></h1>
-        <h2 th:field="*{message}"></h2>
+    <form class="cred-form">
+        <h1 th:text="${response.code}"></h1>
+        <h2 th:text="${response.message}"></h2>
     </form>
 </div>
 </body>

@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.beerwaroff.personaldatasecuritythreatmodelservice.config.property.ServerProperty;
 import ru.beerwaroff.personaldatasecuritythreatmodelservice.exception.PasswordNotMatchException;
 import ru.beerwaroff.personaldatasecuritythreatmodelservice.exception.UsernameAlreadyExistsException;
-import ru.beerwaroff.personaldatasecuritythreatmodelservice.model.User;
+import ru.beerwaroff.personaldatasecuritythreatmodelservice.dto.User;
 import ru.beerwaroff.personaldatasecuritythreatmodelservice.repository.UserRepository;
 import ru.beerwaroff.personaldatasecuritythreatmodelservice.service.MailSenderService;
 import ru.beerwaroff.personaldatasecuritythreatmodelservice.service.UserService;

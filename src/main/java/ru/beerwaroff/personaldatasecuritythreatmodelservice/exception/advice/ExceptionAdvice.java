@@ -7,7 +7,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import ru.beerwaroff.personaldatasecuritythreatmodelservice.dto.ExceptionResponse;
+import ru.beerwaroff.personaldatasecuritythreatmodelservice.dto.response.ExceptionResponse;
 import ru.beerwaroff.personaldatasecuritythreatmodelservice.exception.NotFoundException;
 import ru.beerwaroff.personaldatasecuritythreatmodelservice.exception.PasswordException;
 import ru.beerwaroff.personaldatasecuritythreatmodelservice.exception.PasswordNotMatchException;
@@ -25,24 +25,24 @@ public class ExceptionAdvice {
 
     @ResponseStatus(NOT_FOUND)
     @ExceptionHandler({NotFoundException.class, UsernameNotFoundException.class})
-    public String handleNotFoundException(Model model) {
+    public String handleNotFoundException(Model model, Exception e) {
         model.addAttribute(
                 "response",
                 ExceptionResponse.builder()
                         .code(NOT_FOUND.value())
-                        .message("")
+                        .message(e.getMessage())
                         .build()
         );
         return "exception_advice";
     }
     @ResponseStatus(UNAUTHORIZED)
     @ExceptionHandler({PasswordException.class, AuthenticationServiceException.class})
-    public String handlePasswordException(Model model) {
+    public String handlePasswordException(Model model, Exception e) {
         model.addAttribute(
                 "response",
                 ExceptionResponse.builder()
                         .code(UNAUTHORIZED.value())
-                        .message("")
+                        .message(e.getMessage())
                         .build()
         );
         return "exception_advice";
@@ -55,12 +55,12 @@ public class ExceptionAdvice {
             UsernameAlreadyExistsException.class,
             PasswordNotMatchException.class
     })
-    public String handleBadRequest(Model model) {
+    public String handleBadRequest(Model model, Exception e) {
         model.addAttribute(
                 "response",
                 ExceptionResponse.builder()
                         .code(BAD_REQUEST.value())
-                        .message("")
+                        .message(e.getMessage())
                         .build()
         );
         return "exception_advice";
