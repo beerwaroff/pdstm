@@ -1,70 +1,256 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="ru" xmlns:th="http://thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Моделирование угроз безопасности ПДн</title>
     <link th:href="@{/styles/index.css}" rel="stylesheet">
 </head>
 <body>
-    <div th:fragment="header">
-        <header sec:authorize="!isAuthenticated()">
-            <a th:href="@{/}">НА ГЛАВНУЮ</a>
-            <nav>
-                <ul>
-                    <li><a th:href="@{/login}">ВОЙТИ</a></li>
-                    <li><a th:href="@{/register}">РЕГИСТРАЦИЯ</a></li>
-                </ul>
-            </nav>
-        </header>
-        <header sec:authorize="isAuthenticated()">
-            <a th:href="@{/}">НА ГЛАВНУЮ</a>
-            <nav>
-                <ul>
-                    <li><a th:href="@{/password-changing}">СМЕНИТЬ ПАРОЛЬ</a></li>
-                    <li><a th:href="@{/account-deleting}">УДАЛИТЬ АККАУНТ</a></li>
-                    <li><a th:href="@{/logout}">ВЫЙТИ</a></li>
-                </ul>
-            </nav>
-        </header>
+
+<!--HEADER-->
+<div th:fragment="header">
+    <header sec:authorize="!isAuthenticated()">
+        <a th:href="@{/}">НА ГЛАВНУЮ</a>
+        <nav>
+            <ul>
+                <li><a th:href="@{/login}">ВОЙТИ</a></li>
+                <li><a th:href="@{/register}">РЕГИСТРАЦИЯ</a></li>
+            </ul>
+        </nav>
+    </header>
+    <header sec:authorize="isAuthenticated()">
+        <a th:href="@{/}">НА ГЛАВНУЮ</a>
+        <nav>
+            <ul>
+                <li><a th:href="@{/password-changing}">СМЕНИТЬ ПАРОЛЬ</a></li>
+                <li><a th:href="@{/account-deleting}">УДАЛИТЬ АККАУНТ</a></li>
+                <li><a th:href="@{/logout}">ВЫЙТИ</a></li>
+            </ul>
+        </nav>
+    </header>
+</div>
+
+<!--REQUEST-FORM-->
+<div th:fragment="tm-request-form">
+    <form th:action="@{/}" th:method="post" th:object="${request}">
+        <input th:field="*{names.organizationName}" type="text" placeholder="Название компании"/>
+        <input th:field="*{names.systemName}" type="text" placeholder="Название ИСПДн"/>
+        <input th:field="*{responsible.position}" type="text" placeholder="Должность ответственного за безопасность"/>
+        <input th:field="*{info.category}" type="text" placeholder="Категория ПДн"/>
+        <textarea th:field="*{structure.pc}" placeholder="Программно-аппаратные средства и их характеристика"/>
+        <textarea th:field="*{structure.software}" placeholder="Программное обеспечение"/>
+        <textarea th:field="*{structure.securityTools}" placeholder="Средства защиты информации"/>
+        <div class="request-quiz">
+            <p>
+                <input th:field="*{answers.isGovernmental}" type="checkbox" value="true">Имеет отношение к
+                государственным структурам<br>
+            </p>
+            <p>
+                <input th:field="*{answers.isAccessRemovable}" type="checkbox" value="true">Доступ к съемным
+                носителям<br>
+            </p>
+            <p>
+                <input th:field="*{answers.isProtect}" type="checkbox" value="true">СЗИ<br>
+            </p>
+            <p>
+                <input th:field="*{answers.isFinancial}" type="checkbox" value="true">Представляет финансовый
+                интерес<br>
+            </p>
+            <p>
+                <input th:field="*{answers.isExternal}" type="checkbox" value="true">Имеет выход в общую сеть<br>
+            </p>
+            <p>
+                <input th:field="*{answers.hasDevelopers}" type="checkbox" value="true">В организации есть
+                разработчики<br>
+            </p>
+            <p>
+                <input th:field="*{answers.hasOpponents}" type="checkbox" value="true">Имеет конкурентов<br>
+            </p>
+            <p>
+                <input th:field="*{answers.isAccessKz}" type="checkbox" value="true">Свободный доступ в КЗ<br>
+            </p>
+        </div>
+        <input type="submit" sec:authorize="isAuthenticated()" value="Составить модель угроз">
+        <div style="text-align: center" sec:authorize="!isAuthenticated()">МОДЕЛИРОВАНИЕ УГРОЗ ДОСТУПНО ПОЛЬЗОВАТЕЛЯМ,
+            КОТОРЫЕ ПРОШЛИ АУТЕНТИФИКАЦИЮ
+        </div>
+    </form>
+</div>
+
+<!--THREAT MODEL-->
+<div th:fragment="threat-model">
+    <div class="doc-candidate" style="font-family: Calibri">
+        <h1 style="margin-top: 25px;">МОДЕЛЬ УГРОЗ БЕЗОПАСНОСТИ ПДН ПРИ ИХ ОБРАБОТКЕ В ИСПДН</h1>
+        <span><b>Название организации:</b> <span th:text="${threatModel.info.names.organizationName}"></span></span>
+        <br/>
+        <span><b>Название ИСПДн:</b> <span th:text="${threatModel.info.names.systemName}"></span></span>
+        <br/>
+        <span><b>Должность ответственного за безопасность системы:</b> <span th:text="${threatModel.info.responsible.position}"></span></span>
+        <br/>
+        <span style="margin-top: 25px;"><b>Категория ПДн:</b> <span th:text="${threatModel.info.info.category}"></span></span>
+        <br/>
+        <span style="margin-top: 25px;"><b>Состав ИСПДн</b></span>
+        <table class="standard-table">
+            <tr>
+                <td>Программно-аппаратные средства</td>
+                <td th:text="${threatModel.info.structure.pc}">></td>
+            </tr>
+            <tr>
+                <td>Программное обеспечение</td>
+                <td th:text="${threatModel.info.structure.software}">></td>
+            </tr>
+            <tr>
+                <td>Средства защиты информации</td>
+                <td th:text="${threatModel.info.structure.securityTools}">></td>
+            </tr>
+        </table>
+        <br/>
+        <span style="margin-top: 25px;"><b>Виды риска</b></span>
+        <table class="standard-table">
+            <tr>
+                <td>Идентификатор</td>
+                <td>Наименование</td>
+            </tr>
+            <tr th:each="type : ${threatModel.catalog.riskTypes}">
+                <td th:text="${type.id}"></td>
+                <td th:text="${type.name}"></td>
+            </tr>
+        </table>
+        <br/>
+        <span style="margin-top: 25px;"><b>Негативные последствия</b></span>
+        <table class="standard-table">
+            <tr>
+                <td>Идентификатор</td>
+                <td>Наименование</td>
+            </tr>
+            <tr th:each="type : ${threatModel.catalog.negativeConsequences}">
+                <td th:text="${type.id}"></td>
+                <td th:text="${type.name}"></td>
+            </tr>
+        </table>
+        <br/>
+        <span style="margin-top: 25px;"><b>Актуальные негативные последствия</b></span>
+        <table class="standard-table">
+            <tr>
+                <td>Вид риска</td>
+                <td>Негативное последствие</td>
+            </tr>
+            <tr th:each="negative : ${threatModel.negativeConsequences}">
+                <td th:text="${negative.name}"></td>
+                <td th:text="${negative.risk}"></td>
+            </tr>
+        </table>
+        <br/>
+        <span style="margin-top: 25px;"><b>Виды воздействия</b></span>
+        <table class="standard-table">
+            <tr>
+                <td>Идентификатор</td>
+                <td>Наименование</td>
+            </tr>
+            <tr th:each="type : ${threatModel.catalog.impactTypes}">
+                <td th:text="${type.id}"></td>
+                <td th:text="${type.name}"></td>
+            </tr>
+        </table>
+        <br/>
+        <span style="margin-top: 25px;"><b>Объекты воздействия</b></span>
+        <table class="standard-table">
+            <tr>
+                <td>Объекты воздействия</td>
+                <td>Виды воздействия</td>
+            </tr>
+            <tr th:each="object : ${threatModel.influenceObjects}">
+                <td th:text="${object.name}"></td>
+                <td><span th:each="type : ${object.impactTypeIds}" th:text="${type} + ' '"></span></td>
+            </tr>
+        </table>
+        <br/>
+        <span style="margin-top: 25px;"><b>Виды нарушителя</b></span>
+        <table class="standard-table">
+            <tr>
+                <td>Идентификатор</td>
+                <td>Наименование</td>
+            </tr>
+            <tr th:each="type : ${threatModel.catalog.violatorTypes}">
+                <td th:text="${type.id}"></td>
+                <td th:text="${type.name}"></td>
+            </tr>
+        </table>
+        <br/>
+        <span style="margin-top: 25px;"><b>Источники угроз</b></span>
+        <table class="standard-table">
+            <tr>
+                <td>Вид нарушителя</td>
+                <td>Уровень возможностей нарушителя</td>
+                <td>Категория нарушителя</td>
+            </tr>
+            <tr th:each="violator : ${threatModel.violators}">
+                <td th:text="${violator.name}"></td>
+                <td th:text="${violator.level}"></td>
+                <td th:text="${violator.category}"></td>
+            </tr>
+        </table>
+        <br/>
+        <span style="margin-top: 25px;"><b>Способы реализации</b></span>
+        <table class="standard-table">
+            <tr>
+                <td>Идентификатор</td>
+                <td>Наименование</td>
+            </tr>
+            <tr th:each="type : ${threatModel.catalog.implementationMethods}">
+                <td th:text="${type.id}"></td>
+                <td th:text="${type.name}"></td>
+            </tr>
+        </table>
+        <br/>
+        <span style="margin-top: 25px;"><b>Актуальные способы реализации</b></span>
+        <table class="standard-table">
+            <tr>
+                <td>Виды нарушителей</td>
+                <td>Объекты воздействия</td>
+                <td>Способы реализации</td>
+            </tr>
+            <tr th:each="method : ${threatModel.methods}">
+                <td th:text="${method.violator}"></td>
+                <td th:text="${method.object}"></td>
+                <td><span th:each="type : ${method.methods}" th:text="${type} + ' '"></span></td>
+            </tr>
+        </table>
+        <br/>
+        <span style="margin-top: 25px;"><b>Угрозы</b></span>
+        <table class="standard-table">
+            <tr>
+                <td>Идентификатор</td>
+                <td>Наименование</td>
+            </tr>
+            <tr th:each="type : ${threatModel.catalog.threats}">
+                <td th:text="${type.id}"></td>
+                <td th:text="${type.name}"></td>
+            </tr>
+        </table>
+        <br/>
+        <span style="margin-top: 25px;"><b>Актуальные угрозы</b></span>
+        <table class="standard-table">
+            <tr>
+                <td>Идентификатор</td>
+                <td>Название угрозы</td>
+                <td>Виды нарушителей</td>
+                <td>Объекты воздействия</td>
+                <td>Негативные последствия</td>
+                <td>Способы реализации</td>
+            </tr>
+            <tr th:each="threat : ${threatModel.actualThreats}">
+                <td th:text="${threat.id}"></td>
+                <td th:text="${threat.name}"></td>
+                <td><span th:each="violator : ${threat.violators}" th:text="${violator} + ' '"></span></td>
+                <td><span th:each="object : ${threat.objects}" th:text="${object} + ' '"></span></td>
+                <td><span th:each="nc : ${threat.negativeConsequences}" th:text="${nc} + ' '"></span></td>
+                <td><span th:each="method : ${threat.methods}" th:text="${method} + ' '"></span></td>
+            </tr>
+        </table>
+        <br/>
     </div>
-    <div th:fragment="tm-request-form">
-        <form th:action="@{/}" th:method="post" th:object="${request}">
-            <input th:field="*{names.organizationName}" type="text" placeholder="Название компании" />
-            <input th:field="*{names.systemName}" type="text" placeholder="Название ИСПДн"/>
-            <input th:field="*{responsible.position}" type="text" placeholder="Должность ответственного за безопасность"/>
-            <input th:field="*{info.category}" type="text" placeholder="Категория ПДн"/>
-            <textarea th:field="*{structure.pc}" placeholder="Программно-аппаратные средства и их характеристика"/>
-            <textarea th:field="*{structure.software}" placeholder="Программное обеспечение"/>
-            <textarea th:field="*{structure.securityTools}" placeholder="Средства защиты информации"/>
-            <div class="request-quiz">
-                <p>
-                    <input th:field="*{answers.isGovernmental}" type="checkbox" value="true" >Имеет отношение к государственным структурам<br>
-                </p>
-                <p>
-                    <input th:field="*{answers.isAccessRemovable}" type="checkbox" value="true">Доступ к съемным носителям<br>
-                </p>
-                <p>
-                    <input th:field="*{answers.isProtect}" type="checkbox" value="true">СЗИ<br>
-                </p>
-                <p>
-                    <input th:field="*{answers.isFinancial}" type="checkbox" value="true">Представляет финансовый интерес<br>
-                </p>
-                <p>
-                    <input th:field="*{answers.isExternal}" type="checkbox" value="true">Имеет выход в общую сеть<br>
-                </p>
-                <p>
-                    <input th:field="*{answers.hasDevelopers}" type="checkbox" value="true">В организации есть разработчики<br>
-                </p>
-                <p>
-                    <input th:field="*{answers.hasOpponents}" type="checkbox" value="true">Имеет конкурентов<br>
-                </p>
-                <p>
-                    <input th:field="*{answers.isAccessKz}" type="checkbox" value="true">Свободный доступ в КЗ<br>
-                </p>
-            </div>
-            <input type="submit" sec:authorize="isAuthenticated()" value="Составить модель угроз">
-            <div style="text-align: center" sec:authorize="!isAuthenticated()">МОДЕЛИРОВАНИЕ УГРОЗ ДОСТУПНО ПОЛЬЗОВАТЕЛЯМ, КОТОРЫЕ ПРОШЛИ АУТЕНТИФИКАЦИЮ</div>
-        </form>
-    </div>
+</div>
+
 </body>
 </html>

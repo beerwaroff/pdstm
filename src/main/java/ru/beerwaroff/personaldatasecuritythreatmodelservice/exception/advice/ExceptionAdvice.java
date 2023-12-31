@@ -66,16 +66,16 @@ public class ExceptionAdvice {
         return "exception_advice";
     }
 
-    @ResponseStatus(INTERNAL_SERVER_ERROR)
-    @ExceptionHandler({RuntimeException.class})
-    public String handleException(Model model) {
-        model.addAttribute(
-                "response",
-                ExceptionResponse.builder()
-                        .code(INTERNAL_SERVER_ERROR.value())
-                        .message("Внутренняя ошибка сервера.")
-                        .build()
-        );
-        return "exception_advice";
-    }
+//    @ResponseStatus(INTERNAL_SERVER_ERROR)
+//    @ExceptionHandler({RuntimeException.class})
+//    public String handleException(Model model) {
+//        model.addAttribute(
+//                "response",
+//                ExceptionResponse.builder()
+//                        .code(INTERNAL_SERVER_ERROR.value())
+//                        .message("Внутренняя ошибка сервера.")
+//                        .build()
+//        );
+//        return "exception_advice";
+//    }
 }

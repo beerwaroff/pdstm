@@ -22,3 +22,5 @@ logging:
       jooq:
         tools:
           LoggerListener: DEBUG
+
+threatModelFolder: ${THREAT_MODEL_FOLDER}

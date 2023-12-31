@@ -20,6 +20,7 @@ import static java.util.stream.Collectors.toList;
 public class ActualThreatDeterminationProcessor {
     private final ThreatRepository threatRepository;
     private final ViolatorRepository violatorRepository;
+    private final ReportingProcessor nextProcessor;
 
     public ThreatModel determine(ThreatModel model) {
         val negativeConsequences = model.getNegativeConsequences().stream()
@@ -63,6 +64,6 @@ public class ActualThreatDeterminationProcessor {
                         )).collect(toList())
         );
 
-        return model;
+        return nextProcessor.report(model);
     }
 }

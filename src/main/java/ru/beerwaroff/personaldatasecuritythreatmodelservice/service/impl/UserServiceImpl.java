@@ -16,6 +16,7 @@ import ru.beerwaroff.personaldatasecuritythreatmodelservice.service.UserService;
 import static java.util.UUID.randomUUID;
 import static org.apache.commons.codec.digest.DigestUtils.sha256Hex;
 import static org.springframework.security.core.context.SecurityContextHolder.getContext;
+import static ru.beerwaroff.personaldatasecuritythreatmodelservice.constant.ControllerConstant.PASSWORD_CHANGING_URL;
 import static ru.beerwaroff.personaldatasecuritythreatmodelservice.constant.ControllerConstant.USERS_URL;
 
 @Service
@@ -69,7 +70,7 @@ public class UserServiceImpl implements UserService {
         val subject = "Активация аккаунта.";
         val message = String.format(
                 "Установите пароль по следующей ссылке:\n" +
-                        property.getHost() + property.getPort() + USERS_URL + "/activation/%s", code
+                        property.getHost() + property.getPort() + PASSWORD_CHANGING_URL + "/%s", code
         );
         val user = this.getByEmail(email);
         user.setCode(code);

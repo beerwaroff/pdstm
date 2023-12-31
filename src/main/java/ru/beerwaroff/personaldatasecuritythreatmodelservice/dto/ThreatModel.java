@@ -22,4 +22,8 @@ public class ThreatModel {
     private List<Violator> violators;
     private List<ImplementationMethod> methods;
     private List<ActualThreat> actualThreats;
+
+    //META
+    private String link;
+    private String username;
 }

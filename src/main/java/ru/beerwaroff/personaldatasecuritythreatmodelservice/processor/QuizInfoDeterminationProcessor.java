@@ -10,6 +10,8 @@ import ru.beerwaroff.personaldatasecuritythreatmodelservice.repository.ModelCata
 import ru.beerwaroff.personaldatasecuritythreatmodelservice.repository.NegativeConsequencesRepository;
 import ru.beerwaroff.personaldatasecuritythreatmodelservice.repository.ViolatorRepository;
 
+import static org.springframework.security.core.context.SecurityContextHolder.getContext;
+
 @Component
 @RequiredArgsConstructor
 public class QuizInfoDeterminationProcessor {
@@ -22,6 +24,7 @@ public class QuizInfoDeterminationProcessor {
     public ThreatModel determine(ThreatModelRequest request) {
         return nextProcessor.determine(
                 ThreatModel.builder()
+                        .username(getContext().getAuthentication().getName())
                         .info(request.getInfo())
                         .catalog(
                                 ModelCatalog.builder()

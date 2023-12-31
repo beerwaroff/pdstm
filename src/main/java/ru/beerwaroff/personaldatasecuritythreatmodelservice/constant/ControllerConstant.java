@@ -15,7 +15,12 @@ public final class ControllerConstant {
     public static final String PASSWORD_CHANGING_URL = SLASH + "password-changing";
     public static final String ACCOUNT_DELETING_URL = SLASH + "account-deleting";
     public static final String ACTIVATION_URL = SLASH + "activation";
+    public static final String DOWNLOAD_URL = SLASH + "download";
 
     public static final String CODE_PATH_VARIABLE = "code";
     public static final String CODE_PATH_VARIABLE_URL = SLASH + "{" + CODE_PATH_VARIABLE + "}";
+    public static final String LINK_PATH_VARIABLE = "link";
+    public static final String LINK_PATH_VARIABLE_URL = SLASH + "{" + LINK_PATH_VARIABLE + "}";
+
+    public static final String DOWNLOAD_PDF_MODEL_URL = DOWNLOAD_URL + LINK_PATH_VARIABLE_URL;
 }
