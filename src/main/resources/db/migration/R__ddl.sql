@@ -103,7 +103,8 @@ CREATE TABLE pdstm.violator_implementation_goals (
     violator_id integer NOT NULL,
     implementation_goal_id integer NOT NULL,
     UNIQUE (violator_id, implementation_goal_id),
-    FOREIGN KEY (violator_id) REFERENCES pdstm.violators (id)
+    FOREIGN KEY (violator_id) REFERENCES pdstm.violators (id),
+    FOREIGN KEY (implementation_goal_id) REFERENCES pdstm.implementation_goals (id)
 );
 
 CREATE INDEX pdstm_violator_implementation_goals_violator_id_index ON pdstm.violator_implementation_goals (violator_id);
