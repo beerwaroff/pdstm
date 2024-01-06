@@ -10,7 +10,7 @@
 		<relativePath/>
 	</parent>
 
-	<groupId>ru.beerwaroff</groupId>
+	<groupId>ru.beerwaroff.pdstm</groupId>
 	<artifactId>pdstm</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
@@ -19,8 +19,6 @@
 
 	<properties>
 		<org.jooq.version>3.15.0</org.jooq.version>
-		<org.flywaydb.flyway-test-extensions.version>7.0.0</org.flywaydb.flyway-test-extensions.version>
-		<io.zonky.test.version>2.0.0</io.zonky.test.version>
 		<org.mapstruct.version>1.4.1.Final</org.mapstruct.version>
 		<org.projectlombok.lombok-mapstruct-binder.version>0.2.0</org.projectlombok.lombok-mapstruct-binder.version>
 		<org.apache.maven.plugins.version>3.8.0</org.apache.maven.plugins.version>
@@ -82,28 +80,9 @@
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
-			<groupId>io.zonky.test</groupId>
-			<artifactId>embedded-database-spring-test</artifactId>
-			<version>${io.zonky.test.version}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>io.zonky.test</groupId>
-			<artifactId>embedded-postgres</artifactId>
-			<version>${io.zonky.test.version}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
 			<groupId>org.flywaydb</groupId>
 			<artifactId>flyway-core</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.flywaydb.flyway-test-extensions</groupId>
-			<artifactId>flyway-spring-test</artifactId>
-			<version>${org.flywaydb.flyway-test-extensions.version}</version>
-			<scope>test</scope>
-		</dependency>
-
 
 		<!-- DEVELOPER TOOLS -->
 		<dependency>
