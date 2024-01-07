@@ -1,20 +1,20 @@
 spring:
   datasource:
-    driver-class-name: ${POSTGRES_DRIVER}
-    url: ${POSTGRES_STUDY_DB_URL}
-    username: ${POSTGRES_USERNAME}
-    password: ${POSTGRES_PASSWORD}
+    driver-class-name: ${DATASOURCE_DRIVER}
+    url: ${DATASOURCE_URL}
+    username: ${DATASOURCE_USERNAME}
+    password: ${DATASOURCE_PASSWORD}
 
 mail:
-  host: smtp.yandex.ru
+  host: ${MAIL_HOST}
   username: ${MAIL_USERNAME}
   password: ${MAIL_PASSWORD}
-  port: 465
-  protocol: smtps
+  port: ${MAIL_PORT}
+  protocol: ${MAIL_PROTOCOL}
 
 server:
-  port: 8080
-  host: "http://localhost:"
+  port: ${SERVER_PORT}
+  host: ${SERVER_HOST}"
 
 logging:
   level:
