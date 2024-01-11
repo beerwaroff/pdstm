@@ -16,6 +16,7 @@ import ru.beerwaroff.pdstm.exception.UsernameAlreadyExistsException;
 import javax.validation.ValidationException;
 
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
+import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 import static org.springframework.http.HttpStatus.UNAUTHORIZED;
 
@@ -65,16 +66,16 @@ public class ExceptionAdvice {
         return "exception_advice";
     }
 
-//    @ResponseStatus(INTERNAL_SERVER_ERROR)
-//    @ExceptionHandler({RuntimeException.class})
-//    public String handleException(Model model) {
-//        model.addAttribute(
-//                "response",
-//                ExceptionResponse.builder()
-//                        .code(INTERNAL_SERVER_ERROR.value())
-//                        .message("Внутренняя ошибка сервера.")
-//                        .build()
-//        );
-//        return "exception_advice";
-//    }
+    @ResponseStatus(INTERNAL_SERVER_ERROR)
+    @ExceptionHandler({RuntimeException.class})
+    public String handleException(Model model) {
+        model.addAttribute(
+                "response",
+                ExceptionResponse.builder()
+                        .code(INTERNAL_SERVER_ERROR.value())
+                        .message("Внутренняя ошибка сервера.")
+                        .build()
+        );
+        return "exception_advice";
+    }
 }
